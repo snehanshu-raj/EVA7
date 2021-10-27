@@ -3,65 +3,57 @@ Group members:
 Akanksha Kedia
 Snehanshu Raj
 
-**Step 1:**
+EVA7-S5-Assignment
+Have created a Neural Network model with 99.4% accuracy utilizing all the basic steps of Regularization(Batch Norm, Dropout, GAP), Image augmentation and StepLR
+
+Step 1: Target:
+
+Get the set-up right
+Set Transforms
+Set Data Loader
+Set Basic Working Code
+Set Basic Training & Test Loop
+Results: Parameters: 194,884 Best Training Accuracy: 99.29 Best Test Accuracy: 98.98
+
+Analysis: A large model with more than 194k parameters. A large kernel(7*7) is used in the 8th convolution layer(FC) which is contributing towards the large parameters. Model is over-fitting. Train accuracy is more than Test.
+
+Step 2:
+
 Target:
-Get the set-up right.
-Set Transforms.
-Set Data Loader.
-Set Basic Working Code.
-Set Basic Training  & Test Loop.
 
-Results:
-Parameters: 194,884
-Best Training Accuracy: 99.29
-Best Test Accuracy: 98.98
-
-Analysis:
-A large model.
-Model is over-fitting
-
-**Step 2:**
-Target:
-Reduce parameters as it was a large model.
+Reduce the number of parameters as it is a large model.
+Reduce the size of the big kernel which will help in reducing the parameters
 Include regularization techniques to reduce overfitting
-To reduce the size of the big kernel
+Results: Parameters: 6,070 Best Training Accuracy: 98.33(14th epoch) Best Test Accuracy: 98.60(12th epoch)
 
-Results:
-Parameters: 6,070
-Best Training Accuracy: 98.33(14th epoch)
-Best Test Accuracy: 98.60(12th epoch)
+Analysis: Parameters are reduced from 194k to 6k resulting from: (a)Reducing the parameters in the convoltuion layers (b)Using a Gap layer at the end which helped reduce the kernel size of 7*7. This helped in reducing the model parameters.
 
-Analysis:
-Parameters are reduced.
-Model is under-fitting. Since the parameters are reduced drastically, we see the model performance impacted.
+Model is under-fitting now. This could be due to 2 factors: (a) Since the parameters are reduced drastically(from 194k to 6k), the model performance may have been impacted. (b) The regularization techniques implemented of Batch Norm and Dropout may be causing the underfitting. We shall see in the next steps.
 
-**Step 3:**
+Step 3:
+
 Target:
-Increase parameters to improve model performance.
-Perform Max Pooling at RF=5.
 
-Results:
-Parameters: 10,790
-Best Training Accuracy: 98.94
-Best Test Accuracy: 99.30
+Fix underfitting by: (a) Increasing parameters slightly(around 10k) to improve model performance (b) Work on the regularization techniques to fix underfitting
 
-Analysis:
-Parameters are increased.
-Model is still under-fitting. 
-Seeing image samples, we can see that we can add slight rotation. 
+Perform Max Pooling at RF=5
 
+Results: Parameters: 10,790 Best Training Accuracy: 99.55(accuracy improved than last time) Best Test Accuracy: 99.34 (accuracy improved)
 
-**Step 4:**
-Target:
-To perform image augmentation.
-To improve model performance to fix underfitting.
-Dropout was taken out to improve performance.
+Analysis: Parameters have increased(6k to 10k). Model is performing better- Accuracy has improved and under-fitting has been fixed. Correcting the Max Pooling location also helped with the model performance. To further improve accuracy, looking at the image samples, we can add slight rotation.
 
-Results:
-Parameters: 10,790(image augmentation doesnt add parameters)
-Best Training Accuracy: 99.33(epoch 14th)
-Best Test Accuracy: 99.40(epoch 11th)
+Step 4:
 
-Analysis:
-Model performance is good. We have acchieved our target of 99.4%. 
-Train and Test accuracy gap has reduced drastically hence model is a good one!
+Target: To perform image augmentation to further improve model performance
+
+Results: Parameters: 10,790(image augmentation doesnt add parameters) Best Training Accuracy: 99.34 Best Test Accuracy: 99.40(epoch 7th), 99.41(epoch 12th), 99.44(epoch 13th)
+
+Analysis: With image augmentation, Model performance has improved drastically. It hit the target accuracy 3 times overall with 2 times consistently(epoch 12th and 13th). Train and Test accuracy gap has narrowed hence model is working! We will try the Step LR and see if the performance improves any further
+
+Step 5:
+
+Target: To add StepLR to the model to see if it further improves the accuracy making it more consistent in the last few epochs
+
+Results: Parameters: 10,790(StepLR doesnt add parameters) Best Training Accuracy: 99.32(lesser than the step 3) Best Test Accuracy: 99.41(epoch 10th), 99.40(epoch 13th)
+
+Analysis: StepLR hasnt improved the model any further with it hitting the taregt accuracy only 2 times as opposed to 3 times in step 3. The Train and Test accuracy gap is still narrow in the last few epochs. Hence StepLR didnt help much to further improve the model performance.
